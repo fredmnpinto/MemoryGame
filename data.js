@@ -10,13 +10,16 @@ var jsonData = [
     {
         "q" : "Mark the right sentences:",
         "qtype" : "EscolhaMultipla",
-        "opt1" : "<P> is used to start a new paragraph in HTML",
+        "opt1" : "P within < and > is used to start a new paragraph in HTML",
         "opt2" : "/op is a command that gives you admin privileges in Javascript",
-        "opt3" : "'write less, do more' is a common way to describe JQuery",
-        "answer" : ""
+        "opt3" : "'write less, do more' is a common way to describe jQuery",
+        "answer" : {
+            "a1" : "P within < and > is used to start a new paragraph in HTML",
+            "a2" : "'write less, do more' is a common way to describe jQuery"
+        }
     },
     {
-        "q" : "Mark a C for correct and F for false on the following sentences:",
+        "q" : "Mark a V for correct and F for false on the following sentences:",
         "qtype" : "VerdadeiroFalso",
         "opt1" : "Javascript better than C",
         "opt2" : "2020 has been great so far",

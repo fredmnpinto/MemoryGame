@@ -1,34 +1,31 @@
 <html>
     <head>
-        <script src="jquery-3.5.1.js"></script>
-        <script src="data.js"></script>
-        <script src="indx.js"></script>
         <title>
             Fred TestCenter
         </title>
     </head>
     <body>
+        <div id = "quizCountdown"></div>
+        
         <div class = "qPanel">
-            <div id = "question">               
-            </div>
+            <div id = "question"></div>
+                <div id = "qtype"></div>
             <div>
-                <input type = "radio" id = "qtype" name = "typeOfQuestion"></input>
-            </div>
-            <div>
-                <input type = "radio" id = "opt1" name = "options"></input>
-                <span id = "opt1"></span>
+                <input type = "radio" id = "opt1" name = "options">
+                <span id = "optt1"></span>
             </div>
             <div>
                 <input type = "radio" id = "opt2" name = "options">
-                </input>
-                <span id = "opt2"></span>
+                <span id = "optt2"></span>
             </div>
             <div>
                 <input type = "radio" id = "opt3" name = "options">
-                </input>
-                <span id = "opt3"></span>
+                <span id = "optt3"></span>
             </div>
-            <button onclick = "checarResposta()">next</button>
+            <button onclick = "checarResposta()">Proxima pergunta</button>
         </div>
+        <script src="data.js"></script>
+        <script src="indx.js"></script>
+        <script src="jquery-3.5.1.js"></script>
     </body>
 </html>
