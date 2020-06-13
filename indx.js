@@ -17,27 +17,31 @@ function generate(indx){
     document.getElementById("optt2").innerHTML = jsonData[indx].opt2;
     document.getElementById("optt3").innerHTML = jsonData[indx].opt3;
 }
-            var segundosTotal = 60*2;
-            var min = parseInt(segundosTotal/60);
-            var seg = parseInt(segundosTotal%60);
-            function timer(){
-                document.getElementById("quizCountdown").innerHTML =
-                'Tempo sobrando : ' +min+ ':' +seg+ '';
-                if(segundosTotal <= 0){
-                    setTimeout(expired(), 1);
-                }
-                else{ 
-                segundosTotal -= 1;
-                min = parseInt(segundosTotal/60);
-                seg = parseInt(segundosTotal&60);
-                setTimeout(timer(), 1000);
-                }
-            }
-            function expired(){
-                document.write("O seu tempo expirou :(<br>Você acertou " +pontuacao+ " questoes.");
-                    if(pontuacao == 4) document.write("<br>Perfeito! Parabéns!");
-                    else if(pontuacao == 1 || pontuacao == 0) document.write("<br>Hmm mais sorte na proxima...");
-            }
+var minute = 1;
+var timer;
+let endTime;
+//dar start ao timer    
+    endTime= new Date(new Date().getTime()+ minute * 60000);
+    timer = setInterval(countDown,1000);  
+//Função do timer
+function countDown(){
+    let now = new Date().getTime();
+
+    //encontrar distancia entre o now e o count down date
+    let distance = endTime - now;
+
+    let minutes = Math.floor((distance % (1000 *60 *60)) / (1000 *60));
+    let seconds = Math.floor((distance % (1000 *60 *60)) / 1000);
+
+    $('#timer').html(minutes + ":" + seconds);
+
+    if(distance < 0){
+        document.write("O tempo expirou :(<br>,você acertou " +pontuacao+ " questoes.");
+        if(pontuacao == 4) document.write("<br>Perfeito! Parabéns!");
+        else if(pontuacao == 1 || pontuacao == 0) document.write("<br>Hmm mais sorte na proxima...");
+          
+    }
+}
 generate(0);
 var i = 0; //questao em que esta
 var j = 0; //contador para o caso da resposta multipla
