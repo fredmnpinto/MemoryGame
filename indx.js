@@ -32,29 +32,36 @@ function countDown(){
     let minutes = Math.floor((distance % (1000 *60 *60)) / (1000 *60));
     let seconds = Math.floor((distance % (1000 *60 *60)) / 1000);
 
-    $('#timer').html(minutes + ":" + seconds);
+    
 
     if(distance < 0){
-        document.write("Você acertou " +pontuacao+ " questoes de " +respondidas+ " respondidas.<br>Você errou "+(4 - pontuacao)+".");
+        document.write("Você acertou " +pontuacao+ " questoes de " +respondidas+ " respondidas.<br>Você errou ou não respondeu "+(4 - pontuacao)+" questões.");
         if(pontuacao == 4) document.write("<br>Perfeito! Parabéns!");
-        else if(pontuacao == 1 || pontuacao == 0) document.write("<br>Hmm mais sorte na proxima...");
-          
+        else if(pontuacao == 1 || pontuacao == 0) {document.write("<br>Hmm mais sorte na proxima...");}
+        //$('timer').hide();
+        //$("timer").hide();
+        //$("#timer").hide();
+        //return;
+        //break;
+        //Tentei todos esses mas ainda assim, parece que nenhum funciona e depois de terminado o tempo ele escreve infinitamente o aviso de tempo expirado
     }
+    $('#timer').html(minutes + ":" + seconds);
 }
 generate(0);
 $("#txtInput").hide();
 var i = 0; //questao em que esta
  //numero de questoes respondidas (a cada resposta nao respondida o programa diminui essa variavel em 1)
 function checarResposta(){
-    switch(i){
-        case 0 : checarRespostaUnica(); break;
-        case 1 : checarRespostaMultipla(); break;
-        case 2 : checarRespostaUnica(); break;
-        case 3 : checarPreencherEspaco(); break;
-        default : alert("ERROR");
+    var o = jsonData[i].qtype;
+    switch(o){
+        case "EscolhaUnica" : checarRespostaUnica(); break;
+        case "EscolhaMultipla" : checarRespostaMultipla(); break;
+        case "VerdadeiroFalso" : checarRespostaUnica(); break;
+        case "PreencherEspaco" : checarPreencherEspaco(); break;
+        default : alert("ERROR em qtype de checarResposta()");
     }
     if(jsonData.length - 1 < i){
-        document.write("Você acertou " +pontuacao+ " questoes de " +respondidas+ " respondidas.<br>Você errou "+(4 - pontuacao)+".");
+        document.write("Você acertou " +pontuacao+ " questoes de " +respondidas+ " respondidas.<br>Você errou ou não respondeu "+(4 - pontuacao)+".");
         if(pontuacao == 4) document.write("<br>Perfeito! Parabéns!");
         else if(pontuacao == 1 || pontuacao == 0) document.write("<br>Hmm mais sorte na proxima...");
     }
@@ -81,25 +88,29 @@ function checarRespostaUnica(){
    if(!v) respondidas++;
 };
 
-var f = 0; //variavel para complementar a funcao das respostas multiplas
+//var f = 0; //variavel para complementar a funcao das respostas multiplas
 
 function checarRespostaMultipla(){
-    if(document.getElementById("opt1").checked && jsonData[i].opt1 == jsonData[i].answer.a1){
-        pontuacao += 0.5;
-        f++;
+    if(document.getElementById("opt1").checked && jsonData[i].opt1 == jsonData[i].answer.a1 && document.getElementById("opt3").checked && jsonData[i].opt3 == jsonData[i].answer.a2){
+        pontuacao++;
+        alert("Correto! :D");
     }
-    if(document.getElementById("opt3").checked && jsonData[i].opt3 == jsonData[i].answer.a2){
+    else if(document.getElementById("opt1").checked && jsonData[i].opt1 == jsonData[i].answer.a1){
         pontuacao += 0.5;
-        f++;
-        
+//        f++;
+    }
+    else if(document.getElementById("opt3").checked && jsonData[i].opt3 == jsonData[i].answer.a2){
+        pontuacao += 0.5;
+//        f++;
     }
     let v = document.getElementById("opt3").checked == false && document.getElementById("opt2").checked == false && document.getElementById("opt1").checked == false; 
    if(!v) respondidas++;
-switch(f){
-    case 0: alert("Errado... :("); break;
-    case 1: alert("Parcialmente certo, mas tudo bem."); break;
-    case 2: alert("Correto! :D"); break;
-}
+//switch(f){
+//   case 0: alert("Errado... :("); break;
+//    case 1: alert("Parcialmente certo, mas tudo bem."); break;
+//    case 2: alert("Correto! :D"); break;
+//    default: alert("ERRO na variável 'f'.");
+//}
 i++;
 }
 function q2Setup(){
@@ -111,6 +122,7 @@ $("#opt3").hide();
 $("#optt1").hide();
 $("#optt2").hide();
 $("#optt3").hide();
+document.getElementById("txtInput").removeAttribute("style");
 //$("txtInput").show();
 }
 //$('td[name ="options"]').hide();
