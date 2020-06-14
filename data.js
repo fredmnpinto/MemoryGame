@@ -19,12 +19,12 @@ var jsonData = [
         }
     },
     {
-        "q" : "Mark a V for correct and F for false on the following sentences:",
+        "q" : "The mitochondria is the powerhouse of the cell.",
         "qtype" : "VerdadeiroFalso",
-        "opt1" : "Javascript better than C",
-        "opt2" : "2020 has been great so far",
-        "opt3" : "The mitochondria is the powerhouse of the cell",
-        "answer" : "FFC"
+        "opt1" : "True",
+        "opt2" : "False",
+        "opt3" : "NULL",
+        "answer" : "True"
     },
     {
         "q" : "The english language is currently the ______ human language.",
